@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
-import { deviceRouter, quoteRouter } from './api';
+import { deviceRouter, payRouter, quoteRouter, dataRouter } from './api';
 
 var cors = require('cors');
 const bodyParser = require('body-parser');
@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 
 app.use('/api', deviceRouter);
 app.use('/api', quoteRouter);
+app.use('/api', payRouter);
+app.use('/api', dataRouter);
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');

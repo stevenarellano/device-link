@@ -1,6 +1,6 @@
 import { Collection } from 'mongodb';
-import { mongoURI } from '../../constants';
 import { getCollection } from '../../utils';
+import { QuoteResponse } from '../../types';
 
 function estimateCost(documentCount: number, queryCount: number) {
 	/*
@@ -33,11 +33,6 @@ async function getQuote(dates: string[], queries: any, limit: number) {
 
 	return response;
 }
-
-type QuoteResponse = {
-	quote: number;
-	data_count: number;
-};
 
 export class QuoteService {
 	public async feedback(
