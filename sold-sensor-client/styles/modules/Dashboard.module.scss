@@ -1,0 +1,76 @@
+@use '../global/variables' as *;
+
+.soldSensor {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 60%;
+	margin: 0 auto;
+}
+
+.title {
+	font-size: 2rem;
+	font-weight: bold;
+	color: $text-primary;
+	margin-bottom: 2rem;
+}
+.formGroup {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.formControl {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid $text-tertiary;
+	margin-right: 0.5rem;
+}
+
+.advancedFilters {
+	width: 100%;
+	overflow: auto;
+}
+
+.addFilterBtn {
+	width: 100%;
+	padding: 0.5rem;
+	background-color: $bg-primary;
+	color: $text-primary;
+	border: 1px solid $text-tertiary;
+
+	cursor: pointer;
+	margin-bottom: 1rem;
+}
+
+.submitBtn {
+	width: 100%;
+	padding: 0.5rem;
+	background-color: $bg-secondary;
+	color: $text-primary;
+	border: 1px solid $text-tertiary;
+
+	cursor: pointer;
+}
+
+.removeFilterBtn {
+	background-color: $bg-secondary;
+	color: $text-primary;
+	border: 1px solid $text-tertiary;
+	margin-left: 0.5rem;
+}
+
+.removeFilterBtn,
+.submitBtn {
+	background-color: $bg-secondary;
+	color: $text-primary;
+	border: 1px solid $text-tertiary;
+	padding: 0.5rem;
+	transition: background-color 0.3s ease-in-out;
+	&:hover {
+		background-color: darken($bg-secondary, 10%);
+	}
+	&:active {
+		background-color: darken($bg-secondary, 20%);
+	}
+}

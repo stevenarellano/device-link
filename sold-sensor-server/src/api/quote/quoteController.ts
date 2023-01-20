@@ -15,7 +15,21 @@ export class QuoteController {
 		res: express.Response
 	): Promise<void> {
 		const { period, queries, limit } = req.body;
-		const quote = await this.quoteService.feedback(period, queries, limit);
+		const quote = await this.quoteService.poster(
+			period,
+			queries,
+			limit as number
+		);
+		res.send(quote);
+	}
+
+	public async getHandler(
+		req: express.Request,
+		res: express.Response
+	): Promise<void> {
+		console.log(req.query);
+		const { quote_id } = req.query;
+		const quote = await this.quoteService.getter(quote_id as string);
 		res.send(quote);
 	}
 }

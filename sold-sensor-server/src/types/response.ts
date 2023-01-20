@@ -3,8 +3,7 @@ export type PayResponse = {
 };
 
 export type QuoteResponse = {
-	quote: number;
-	data_count: number;
+	quote_id: string;
 };
 
 export type DataResponse = {

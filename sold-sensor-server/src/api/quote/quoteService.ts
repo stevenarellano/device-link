@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb';
+import { Collection, ObjectId } from 'mongodb';
 import { getCollection } from '../../utils';
 import { QuoteResponse } from '../../types';
 
@@ -13,6 +13,11 @@ function estimateCost(documentCount: number, queryCount: number) {
 	return complexityFactor * documentCount + transactionFee;
 }
 
+type Quote = {
+	quote: number;
+	data_count: number;
+};
+
 async function getQuote(dates: string[], queries: any, limit: number) {
 	const deviceData: Collection = getCollection('DeviceDate', 'all');
 
@@ -26,7 +31,7 @@ async function getQuote(dates: string[], queries: any, limit: number) {
 	const numQueries = Object.keys(queries).length;
 	const quote = estimateCost(count, numQueries);
 
-	const response: QuoteResponse = {
+	const response: Quote = {
 		quote,
 		data_count: count,
 	};
@@ -34,12 +39,48 @@ async function getQuote(dates: string[], queries: any, limit: number) {
 	return response;
 }
 
+async function saveQuote(quote: number, data_count: number) {
+	const quoteData: Collection = getCollection('Quotes', 'solana');
+	console.log(quote, data_count);
+	const result = await quoteData.insertOne({
+		quote: quote as number,
+		data_count: data_count as number,
+	});
+
+	return result.insertedId.toHexString();
+}
+
+async function findQuote(quoteId: string) {
+	const quoteData: Collection = getCollection('Quotes', 'solana');
+	const _id: ObjectId = ObjectId.createFromHexString(quoteId);
+	console.log(_id);
+	const res = await quoteData.findOne({ _id });
+	console.log(res);
+	return res;
+}
+
 export class QuoteService {
-	public async feedback(
+	public async poster(
 		period: string[],
 		queries: any,
 		limit: number
 	): Promise<QuoteResponse> {
-		return await getQuote(period, queries, limit);
+		console.log('QUOTE SERVICE POST: ', period, queries, limit);
+		const quoteData = await getQuote(period, queries, limit);
+		const quoteId = await saveQuote(quoteData.quote, quoteData.data_count);
+		return { quote_id: quoteId };
+	}
+
+	public async getter(quoteId: string): Promise<any> {
+		console.log('QUOTE SERVICE GET: ', quoteId);
+		const quoteData = await findQuote(quoteId);
+		if (!quoteData) {
+			throw 'Invalid Quote ID';
+		}
+		return {
+			quote_id: quoteId,
+			cost: quoteData.quote,
+			data_count: quoteData.data_count,
+		};
 	}
 }

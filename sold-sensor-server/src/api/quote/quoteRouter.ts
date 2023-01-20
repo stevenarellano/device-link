@@ -12,4 +12,8 @@ router.post(urlPath, (req, res) => {
 	quoteController.postHandler(req, res);
 });
 
+router.get(urlPath, (req, res) => {
+	quoteController.getHandler(req, res);
+});
+
 export { router as quoteRouter };

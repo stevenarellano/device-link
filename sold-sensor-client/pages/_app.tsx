@@ -1,11 +1,16 @@
 import '/styles/global/globals.scss';
 
 import Head from 'next/head';
-import { Navbar } from '../components';
 import type { AppProps } from 'next/app';
+
+import { RecoilRoot } from 'recoil';
+
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 
 
 export default function App({ Component, pageProps }: AppProps) {
+  const phantomWallet = new PhantomWalletAdapter();
+
   return (
     <>
       <Head>
@@ -18,8 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <main>
-        <Navbar />
-        <Component {...pageProps} />
+        <RecoilRoot>
+
+          <Component {...pageProps} />
+
+        </RecoilRoot>
       </main>
 
     </>

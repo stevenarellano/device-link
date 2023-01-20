@@ -39,6 +39,7 @@ export class PayService {
 		queries: any,
 		count: number
 	): Promise<PayResponse> {
+		console.log('PAY SERVICE: ', period, queries, count);
 		// TODO: ADD SOLANA TXN HANDLING
 		const accessKey = await addReceipt(period, queries, count);
 		return { access_key: accessKey };
