@@ -5,11 +5,8 @@ import type { AppProps } from 'next/app';
 
 import { RecoilRoot } from 'recoil';
 
-import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
-
 
 export default function App({ Component, pageProps }: AppProps) {
-  const phantomWallet = new PhantomWalletAdapter();
 
   return (
     <>
@@ -24,9 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <main>
         <RecoilRoot>
-
           <Component {...pageProps} />
-
         </RecoilRoot>
       </main>
 

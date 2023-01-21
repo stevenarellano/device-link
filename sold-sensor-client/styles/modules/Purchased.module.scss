@@ -1,0 +1,46 @@
+@use '../global/variables.scss' as *;
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	background-color: $bg-primary;
+	color: $text-primary;
+}
+
+.header {
+	font-size: 2rem;
+	margin-bottom: 20px;
+	color: $text-primary;
+}
+
+.keyContainer {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	color: $text-secondary;
+}
+
+.key {
+	font-weight: bold;
+	color: $text-primary;
+}
+
+.copyBtn,
+.startOverBtn {
+	background-color: $bg-tertiary;
+	color: $text-primary;
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	margin-bottom: 20px;
+	&:hover {
+		background-color: darken($bg-tertiary, 10%);
+	}
+}
+
+.curlCommand {
+	font-size: 1.2rem;
+	margin-bottom: 20px;
+	color: $text-tertiary;
+}

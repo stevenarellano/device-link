@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from '/styles/modules/Dashboard.module.scss';
 import { callPay, getQuote } from '../../api';
 import { useRouter } from "next/router";
+import { useSetRecoilState } from 'recoil';
+import { queryInfoState } from '../../context';
 
 interface Props {
     error: string;
@@ -22,6 +24,7 @@ const Dashboard = () => {
     const [advancedFilters, setAdvancedFilters] = useState([]) as any;
     const [error, setError] = useState('');
     const router = useRouter();
+    const setQueryInfo = useSetRecoilState(queryInfoState);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -41,15 +44,23 @@ const Dashboard = () => {
 
         const start = new Date(startDate);
         const end = new Date(endDate);
+
+
+        const advancedFiltersObject = advancedFilters.reduce(
+            (obj: any, item: { parameter: any; value: any; }) => Object.assign(obj, { [item.parameter]: item.value }), {});
+
         if (!hasError && start <= end) {
             const body = {
-                period: [start, end],
-                queries: advancedFilters,
+                period: [start.toISOString(), end.toISOString()],
+                queries: advancedFiltersObject,
                 limit: countLimit,
             };
             console.log(body);
             const quoteId = await getQuote(body);
-            if (quoteId.length) { router.push({ pathname: '/payment', query: { 'quoteId': quoteId } }); }
+            if (quoteId.length) {
+                setQueryInfo({ period: body.period, queries: body.queries, count: body.limit });
+                router.push({ pathname: '/payment', query: { 'quoteId': quoteId } });
+            }
             else { setError('No quoteId returned from server. Please try again.'); }
         }
     };

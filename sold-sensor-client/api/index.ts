@@ -1,4 +1,5 @@
 export * from './useHome';
 export * from './isWalletConnected';
-export * from './sendTransaction';
+export * from './sendPhantomTransaction';
 export * from './routes';
+export * from './getProvider';

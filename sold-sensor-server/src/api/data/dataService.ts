@@ -39,8 +39,8 @@ async function fetchData(
 
 		const dataQuery = {
 			date_added: {
-				$gte: new Date(period[0]),
-				$lte: new Date(period[1]),
+				$gte: period[0],
+				$lte: period[1],
 			},
 			...queries,
 		};
@@ -57,10 +57,11 @@ async function fetchData(
 
 export class DataService {
 	public async feedback(accessKey: string): Promise<DataResponse> {
+		console.log('DATA SERVICE: ', accessKey);
 		const { count, queries, date_start, date_end } = await fetchReceipt(
 			accessKey
 		);
-		if (count === 0) return { count: 0, data: '' };
+		if (count === 0) return { count: 0, data: [] };
 
 		return await fetchData([date_start, date_end], queries, count);
 	}

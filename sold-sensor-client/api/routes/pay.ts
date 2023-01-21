@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { BASE_URL } from '../../context';
 
-const callPay = async (requestBody: any) => {
+const callPay = async (requestBody: {
+	period: string[];
+	queries: any;
+	count: number;
+}) => {
 	let accessKey = '';
 
 	const headers = {

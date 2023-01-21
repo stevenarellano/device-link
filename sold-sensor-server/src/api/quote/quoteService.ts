@@ -19,17 +19,21 @@ type Quote = {
 };
 
 async function getQuote(dates: string[], queries: any, limit: number) {
-	const deviceData: Collection = getCollection('DeviceDate', 'all');
+	const deviceData: Collection = getCollection('DeviceData', 'all');
 
 	const countQuery = {
-		date_added: { $gte: new Date(dates[0]), $lte: new Date(dates[1]) },
+		date_added: { $gte: dates[0], $lte: dates[1] },
 		...queries,
 	};
 
-	const count = Math.min(await deviceData.countDocuments(countQuery), limit);
+	console.log(countQuery);
+
+	const found = await deviceData.countDocuments(countQuery);
+	const count = Math.min(limit, found);
 
 	const numQueries = Object.keys(queries).length;
-	const quote = estimateCost(count, numQueries);
+
+	const quote = Number(estimateCost(count, numQueries).toFixed(3));
 
 	const response: Quote = {
 		quote,
@@ -41,7 +45,6 @@ async function getQuote(dates: string[], queries: any, limit: number) {
 
 async function saveQuote(quote: number, data_count: number) {
 	const quoteData: Collection = getCollection('Quotes', 'solana');
-	console.log(quote, data_count);
 	const result = await quoteData.insertOne({
 		quote: quote as number,
 		data_count: data_count as number,
@@ -50,12 +53,11 @@ async function saveQuote(quote: number, data_count: number) {
 	return result.insertedId.toHexString();
 }
 
-async function findQuote(quoteId: string) {
+export async function findQuote(quoteId: string) {
 	const quoteData: Collection = getCollection('Quotes', 'solana');
 	const _id: ObjectId = ObjectId.createFromHexString(quoteId);
-	console.log(_id);
 	const res = await quoteData.findOne({ _id });
-	console.log(res);
+
 	return res;
 }
 
