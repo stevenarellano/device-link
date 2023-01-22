@@ -38,7 +38,7 @@ const Purchased = () => {
                 {state.copied ? "Copied" : "Copy Access Key"}
             </button>
             <p>Or use this curl command to access data:</p>
-            <code className={styles.curlCommand}>{curlCommand}</code>
+            <code className={styles.curlCommand}>{`curl...${curlCommand.slice(-12)}`}</code>
             <button className={styles.copyBtn} onClick={copyCurlCommand}>
                 {state.copied ? "Copied" : "Copy curl command"}
             </button>

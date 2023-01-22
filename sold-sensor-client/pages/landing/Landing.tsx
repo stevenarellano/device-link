@@ -6,7 +6,7 @@ const Landing: React.FC = () => {
     const router = useRouter();
     return (
         <div className={styles.landingContainer}>
-            <h1 className={styles.heading}>Welcome to Sold Sensor</h1>
+            <h1 className={styles.heading}>Welcome to Sensor Sold</h1>
             <p className={styles.subHeading}>The ultimate tool for tracking your sales</p>
             <div className={styles.buttonContainer}>
                 <button className={styles.buyersButton} onClick={() => router.push('/dashboard')}>Buyers</button>

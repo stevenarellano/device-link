@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     return (
         <div className={styles.soldSensor}>
-            <h1 className={styles.title}>Sold Sensor</h1>
+            <h1 className={styles.title}>Sensor Sold</h1>
             <form style={{ width: "100%" }} onSubmit={handleSubmit}>
                 <label className={styles.formGroup}>
                     Count Limit:

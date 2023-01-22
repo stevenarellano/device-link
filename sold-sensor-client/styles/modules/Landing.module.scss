@@ -4,6 +4,13 @@
 	background: $background;
 	color: $text;
 	text-align: center;
+
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+
+	justify-content: center;
+	align-items: center;
 }
 
 .heading {

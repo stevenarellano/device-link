@@ -12,9 +12,9 @@ export const advancedFilterOptions = [
 ];
 
 export const useDashboard = () => {
-	const [countLimit, setCountLimit] = useState(10);
+	const [countLimit, setCountLimit] = useState(1000);
 	const [startDate, setStartDate] = useState(
-		new Date().toISOString().slice(0, 10)
+		new Date(0).toISOString().slice(0, 10)
 	);
 	const [endDate, setEndDate] = useState(
 		new Date().toISOString().slice(0, 10)

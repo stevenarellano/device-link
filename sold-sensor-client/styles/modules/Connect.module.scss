@@ -4,13 +4,20 @@
 	background: $background;
 	color: $text;
 	text-align: center;
-	padding: 20px;
+	padding: 0 10%;
+
+	height: 90vh;
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
 }
 
 .heading {
 	color: $secondary;
-	font-size: 2em;
-	margin-bottom: 10px;
+	font-size: 1.5em;
 }
 
 .subHeading {
@@ -25,8 +32,7 @@
 
 .step {
 	color: $medium-gray;
-	font-size: 1.2em;
-	margin-bottom: 10px;
+	font-size: 0.8em;
 }
 
 .providers {
@@ -43,12 +49,14 @@
 
 .provider {
 	color: $light-gray;
-	font-size: 1.2em;
+	font-size: 0.8em;
 	margin-bottom: 10px;
+	width: 100%;
 }
 
 .provider a {
-	color: $primary;
+	color: $secondary;
+	width: 100%;
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
@@ -60,7 +68,9 @@
 	color: $text;
 	padding: 10px 20px;
 	border-radius: 5px;
-	font-size: 1em;
+	font-size: 0.8em;
+
+	width: 30%;
 	margin-top: 20px;
 	cursor: pointer;
 	&:hover {

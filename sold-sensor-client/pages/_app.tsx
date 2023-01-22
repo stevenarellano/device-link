@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Sold Sensor</title>
+        <title>Sensor Sold</title>
         <meta
           name="description"
           content="A webapp"
