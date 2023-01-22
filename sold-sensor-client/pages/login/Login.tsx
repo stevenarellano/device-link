@@ -31,7 +31,7 @@ const Login = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Welcome to Sensor Sold</h1>
+            <h1 className={styles.title}>Welcome to Device Link</h1>
             <p className={styles.subtitle}>
                 Please log in with your Phantom Wallet to access your dashboard.
             </p>

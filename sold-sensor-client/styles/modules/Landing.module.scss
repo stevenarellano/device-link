@@ -2,6 +2,12 @@
 
 .landingContainer {
 	background: $background;
+
+	background-image: url('https://www.pmf-research.eu/wp-content/uploads/2018/12/PMF-Blockchain-1.png');
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+	background-position: 10% 10%;
+
 	color: $text;
 	text-align: center;
 
@@ -14,7 +20,7 @@
 }
 
 .heading {
-	color: $secondary;
+	color: $text;
 	font-size: 2em;
 	margin-bottom: 10px;
 }
@@ -34,7 +40,7 @@
 .sellersButton {
 	background: $primary;
 	color: $text;
-	padding: 10px 20px;
+	padding: 10px 40px;
 	border-radius: 5px;
 	font-size: 1em;
 	margin: 0 10px;

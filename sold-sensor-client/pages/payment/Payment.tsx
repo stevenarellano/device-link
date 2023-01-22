@@ -51,7 +51,7 @@ const Payment = () => {
                     <>
                         <div className={styles.data}>Cost in SOL: {quote.cost}</div>
                         <div className={styles.data}>Amount of data to be fetched: {quote.data_count}</div>
-                        <div>
+                        <div className={styles.btnContainer}>
                             <button className={styles.button} onClick={() => router.push('/dashboard')}>Go Back</button>
                             <button className={styles.button} onClick={handleBuy}>Buy</button>
                         </div>
