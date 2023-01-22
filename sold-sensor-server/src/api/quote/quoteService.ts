@@ -26,8 +26,6 @@ async function getQuote(dates: string[], queries: any, limit: number) {
 		...queries,
 	};
 
-	console.log(countQuery);
-
 	const found = await deviceData.countDocuments(countQuery);
 	const count = Math.min(limit, found);
 

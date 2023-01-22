@@ -3,7 +3,6 @@ import { getCollection } from '../../utils';
 import { DataResponse, SolanaReceipt } from '../../types';
 
 async function fetchReceipt(accessKey: string): Promise<SolanaReceipt> {
-	console.log(accessKey);
 	let receipt: SolanaReceipt = {
 		count: 0,
 		queries: '',
@@ -19,7 +18,6 @@ async function fetchReceipt(accessKey: string): Promise<SolanaReceipt> {
 		if (!res) {
 			throw 'Invalid Access Key';
 		}
-		console.log(res);
 		receipt = { ...res };
 	} catch (error) {
 		console.log('ERROR: Could not find receipt');

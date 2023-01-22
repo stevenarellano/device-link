@@ -27,7 +27,6 @@ export class QuoteController {
 		req: express.Request,
 		res: express.Response
 	): Promise<void> {
-		console.log(req.query);
 		const { quote_id } = req.query;
 		const quote = await this.quoteService.getter(quote_id as string);
 		res.send(quote);
