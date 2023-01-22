@@ -9,10 +9,13 @@ body {
 	margin: 0;
 	font-size: 24px;
 	border-radius: 0;
+
+	background-color: $background;
 }
 
 * {
 	font-family: 'Space Grotesk', sans-serif !important;
+	border: none;
 }
 
 body * {

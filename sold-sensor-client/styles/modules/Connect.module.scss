@@ -1,0 +1,69 @@
+@use '../global/variables' as *;
+
+.connectContainer {
+	background: $background;
+	color: $text;
+	text-align: center;
+	padding: 20px;
+}
+
+.heading {
+	color: $secondary;
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
+.subHeading {
+	color: $light-gray;
+	margin-bottom: 20px;
+}
+
+.stepsList {
+	margin-top: 20px;
+	text-align: left;
+}
+
+.step {
+	color: $medium-gray;
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+.providers {
+	color: $medium-gray;
+	margin-top: 20px;
+}
+
+.providersList {
+	list-style: none;
+	text-align: left;
+	padding-left: 0;
+	margin-top: 10px;
+}
+
+.provider {
+	color: $light-gray;
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+.provider a {
+	color: $primary;
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.backButton {
+	background: $tertiary;
+	color: $text;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1em;
+	margin-top: 20px;
+	cursor: pointer;
+	&:hover {
+		background: darken($tertiary, 10%);
+	}
+}

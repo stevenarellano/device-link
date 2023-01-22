@@ -1,0 +1,45 @@
+@use '../global/variables' as *;
+
+.landingContainer {
+	background: $background;
+	color: $text;
+	text-align: center;
+}
+
+.heading {
+	color: $secondary;
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
+.subHeading {
+	color: $light-gray;
+	margin-bottom: 20px;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.buyersButton,
+.sellersButton {
+	background: $primary;
+	color: $text;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1em;
+	margin: 0 10px;
+	cursor: pointer;
+	&:hover {
+		background: darken($primary, 10%);
+	}
+}
+
+.sellersButton {
+	background: $tertiary;
+	&:hover {
+		background: darken($tertiary, 10%);
+	}
+}

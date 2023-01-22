@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '/styles/modules/Dashboard.module.scss';
-import { callPay, getQuote } from '../../api';
-import { useRouter } from "next/router";
-import { useSetRecoilState } from 'recoil';
-import { queryInfoState } from '../../context';
+import { useDashboard } from './useDashboard';
 
-interface Props {
-    error: string;
-}
-
-const Error = ({ error }: Props) => {
+const Error = ({ error }: any) => {
     return (
         <div className={styles.error}>
             {error}
@@ -18,68 +11,7 @@ const Error = ({ error }: Props) => {
 };
 
 const Dashboard = () => {
-    const [countLimit, setCountLimit] = useState(10);
-    const [startDate, setStartDate] = useState(new Date().toISOString().slice(0, 10));
-    const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
-    const [advancedFilters, setAdvancedFilters] = useState([]) as any;
-    const [error, setError] = useState('');
-    const router = useRouter();
-    const setQueryInfo = useSetRecoilState(queryInfoState);
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        let hasError = false;
-        if (!countLimit) {
-            setError('Please enter a count limit.');
-            hasError = true;
-        }
-        if (!startDate) {
-            setError('Please enter a start date.');
-            hasError = true;
-        }
-        if (!endDate) {
-            setError('Please enter an end date.');
-            hasError = true;
-        }
-
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-
-
-        const advancedFiltersObject = advancedFilters.reduce(
-            (obj: any, item: { parameter: any; value: any; }) => Object.assign(obj, { [item.parameter]: item.value }), {});
-
-        if (!hasError && start <= end) {
-            const body = {
-                period: [start.toISOString(), end.toISOString()],
-                queries: advancedFiltersObject,
-                limit: countLimit,
-            };
-            console.log(body);
-            const quoteId = await getQuote(body);
-            if (quoteId.length) {
-                setQueryInfo({ period: body.period, queries: body.queries, count: body.limit });
-                router.push({ pathname: '/payment', query: { 'quoteId': quoteId } });
-            }
-            else { setError('No quoteId returned from server. Please try again.'); }
-        }
-    };
-
-    const handleAddFilter = () => {
-        setAdvancedFilters([...advancedFilters, { parameter: '', value: '' }]);
-    };
-
-    const handleRemoveFilter = (index: number) => {
-        const newFilters = [...advancedFilters];
-        newFilters.splice(index, 1);
-        setAdvancedFilters(newFilters);
-    };
-
-    const handleFilterChange = (e: any, index: number) => {
-        const newFilters = [...advancedFilters];
-        newFilters[index][e.target.name] = e.target.value;
-        setAdvancedFilters(newFilters);
-    };
+    const { countLimit, setCountLimit, startDate, setStartDate, endDate, setEndDate, advancedFilters, setAdvancedFilters, error, setError, handleSubmit, handleAddFilter, handleRemoveFilter, handleFilterChange, advancedFilterOptions } = useDashboard();
 
     return (
         <div className={styles.soldSensor}>
@@ -112,36 +44,52 @@ const Dashboard = () => {
                         className={styles.formControl}
                     />
                 </label>
-                {advancedFilters.map((filter: any, index: any) => (
-                    <label key={index} className={styles.formGroup}>
-                        <input
-                            type="text"
-                            name="parameter"
-                            value={filter.parameter}
-                            onChange={(e: any) => handleFilterChange(e, index)}
-                            className={styles.formControl}
-                        />
-                        :&nbsp;
-                        <input
-                            type="text"
-                            name="value"
-                            value={filter.value}
-                            onChange={(e: any) => handleFilterChange(e, index)}
-                            className={styles.formControl}
-                        />
-                        <button type="button" onClick={() => handleRemoveFilter(index)} className={styles.removeFilterBtn}>Remove</button>
-                    </label>
-                ))
-                }
-                <button type="button" onClick={handleAddFilter} className={styles.addFilterBtn}>
-                    Add Filter
+                <div className={styles.advancedFiltersContainer}>
+                    <h3 className={styles.advancedFiltersTitle}>Advanced Filters</h3>
+                    <div className={styles.advancedFilters}>
+                        {advancedFilters.map((filter: any, index: any) => (
+                            <div key={index} className={styles.advancedFilter}>
+                                <select
+                                    name="parameter"
+                                    value={filter.parameter}
+                                    onChange={e => handleFilterChange(e, index)}
+                                    className={styles.formControl}
+                                >
+                                    {advancedFilterOptions.map((option, index) => (
+                                        <option key={index} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </select>
+                                <input
+                                    type="text"
+                                    name="value"
+                                    value={filter.value}
+                                    onChange={e => handleFilterChange(e, index)}
+                                    className={styles.formControl}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemoveFilter(index)}
+                                    className={styles.removeFilter}
+                                >
+                                    X
+                                </button>
+                            </div>
+                        ))}
+                        <button type="button" onClick={handleAddFilter} className={styles.addFilter}>
+                            Add Filter
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" className={styles.submitButton}>
+                    Submit
                 </button>
-                <br />
-                <button type="submit" className={styles.submitBtn}>Submit</button>
                 {error && <Error error={error} />}
-            </form >
-        </div >
+            </form>
+        </div>
     );
 };
 
 export default Dashboard;
+

@@ -1,35 +1,35 @@
 @use '../global/variables.scss' as *;
-
 .container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	min-height: 100vh;
-	background-color: $bg-primary;
+	justify-content: center;
+	height: 100vh;
+	width: 100%;
+	padding: 20px;
 }
 
 .dataContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	background: $dark-gray;
+	color: $text;
+	padding: 20px;
+	max-width: 600px;
+	width: 100%;
 }
 
 .data {
-	color: $text-primary;
-	font-size: 1.5rem;
-	margin-bottom: 1rem;
+	font-size: 1.2em;
+	margin-bottom: 10px;
 }
 
 .button {
-	background-color: $bg-secondary;
-	color: $text-primary;
-	border: none;
-	padding: 0.5rem 1rem;
-	font-size: 1.2rem;
+	background: $primary;
+	color: $text;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1em;
+	margin-right: 10px;
 	cursor: pointer;
-	margin-right: 0.5rem;
 	&:hover {
-		background-color: $bg-tertiary;
-		color: $text-tertiary;
+		background: darken($primary, 10%);
 	}
 }
