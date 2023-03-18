@@ -14,7 +14,7 @@ const Connect: React.FC = () => {
                 <li className={styles.step}>Have a device added to your favorite LNS</li>
                 <li className={styles.step}>Select the option to add an HTTP integration</li>
                 <li className={styles.step}>Select the POST option</li>
-                <li className={styles.step}>Enter our device endpoint URL: {BASE_URL}api/device</li>
+                <li className={styles.step}>Enter our device endpoint URL: {BASE_URL}/api/device</li>
                 <li className={styles.step}>Add your Solana wallet address to the URL params under address:&lt;address&gt;</li>
                 <li className={styles.step}>Add the integration</li>
             </ol>
