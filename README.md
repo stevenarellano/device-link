@@ -7,3 +7,8 @@ Device link is a peer to peer market place that allows users with IoT devices to
 ### Demo Video (redirects to youtube)
 
 [![Sandstorm Hackathon Demo Video](assets/thumbnail.png)](https://youtu.be/1QtqTcniJqQ)
+
+
+### Misc
+
+Discontinued development due to pursuit of other ideas.
